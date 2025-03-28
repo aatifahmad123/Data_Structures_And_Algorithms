@@ -44,7 +44,7 @@ int countPartitions(vector<int>& arr, int d) {
     int l = 0, r = target;
 
     while(l <= r){
-        if((r - l) == d ){
+        if((r - l) == d){
             num_subsets = dp[n][l];
         }
         l++;
@@ -54,12 +54,18 @@ int countPartitions(vector<int>& arr, int d) {
     return num_subsets * zero_subsets;
 }
 
+int findTargetSumWays(vector<int>& nums, int target) {
+
+    return countPartitions(nums,abs(target));
+
+}
+
 int main() {
 
     // your code goes here
-    vector<int> arr = {3,8,0,2};
-    int d = 0;
-    cout << "numPartitions : " << countPartitions(arr,d) << endl;
+    vector<int> nums = {7,9,3,8,0,2,4,8,3,9};
+    int target = 0;
+    cout << "Number of ways : " << findTargetSumWays(nums,target) << endl;
 
     return 0;
 }
