@@ -1,8 +1,7 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-int perfectSum(vector<int> &arr, int target){
+int solve(vector<int> &arr, int target){
 
     int n = arr.size();
 
@@ -30,10 +29,44 @@ int perfectSum(vector<int> &arr, int target){
     return dp[n][target];
 }
 
+int perfectSum(vector<int> &arr, int target){
+
+    int n = arr.size();
+
+    // target = 0
+    if(target == 0){
+        int cnt = 0;
+        for(int i = 0;i < n;i++){
+            if(arr[i] == 0){
+                cnt++;
+            }
+        }
+        int num_subsets = pow(2,cnt);
+        return num_subsets;
+    }
+
+    // when target is non zero
+
+    vector<int> arrNew;
+    int count_zeros = 0;
+    for(int &i : arr){
+        if(i != 0){
+            arrNew.push_back(i);
+        }
+        else{
+            count_zeros++;
+        }
+    }
+
+    int num = solve(arrNew,target);
+    return pow(2,count_zeros) * num;
+    
+}
+
 int main(){
 
-    vector<int> arr = {5,2,3,10,6,8};
-    int target = 10;
+    vector<int> arr = {0, 30 ,18, 33, 29, 27, 39, 0};
+    int target = 30;
 
     cout << "Number of subsets : " << perfectSum(arr,target) << endl;
 
